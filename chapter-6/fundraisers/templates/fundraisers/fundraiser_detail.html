@@ -1,0 +1,26 @@
+{% extends "fundraisers/base.html" %}
+
+{% block title %}{{ fundraiser.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ fundraiser.name }}</h1>
+    <p>{{ fundraiser.description }}</p>
+    <div class="bar"><div class="fill" style="width: {{ fundraiser.percent }}%"></div></div>
+    <p>TZS {{ fundraiser.total_paid|floatformat:"0g" }} of {{ fundraiser.target|floatformat:"0g" }} ({{ fundraiser.percent }}%)</p>
+    <p><a class="button" href="{% url 'pledge_create' fundraiser.id %}">Make a pledge</a></p>
+
+    <h2>Who has pledged</h2>
+    {% for pledge in pledges %}
+        <div class="card">
+            <strong>{{ pledge.name }}</strong> pledged TZS {{ pledge.amount|floatformat:"0g" }}
+            {% if pledge.balance > 0 %}
+                (paid {{ pledge.paid|floatformat:"0g" }})
+                <a class="button" href="{% url 'lipa' pledge.id %}">Lipa</a>
+            {% else %}
+                <span class="paid">Paid in full</span>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>Nobody has pledged yet. Be the first!</p>
+    {% endfor %}
+{% endblock %}

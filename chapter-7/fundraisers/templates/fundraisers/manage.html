@@ -1,0 +1,14 @@
+{% extends "fundraisers/base.html" %}
+
+{% block content %}
+    <h1>Organiser page</h1>
+    <p><a class="button" href="{% url 'fundraiser_create' %}">New fundraiser</a></p>
+    {% for fundraiser in fundraisers %}
+        <div class="card">
+            <h2>{{ fundraiser.name }}</h2>
+            {% for pledge in fundraiser.pledges.all %}
+                <p>{{ pledge.name }}, {{ pledge.phone }}: pledged {{ pledge.amount|floatformat:"0g" }}, owes {{ pledge.balance|floatformat:"0g" }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

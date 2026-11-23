@@ -1,0 +1,10 @@
+{% extends "fundraisers/base.html" %}
+
+{% block content %}
+    <h1>Organiser login</h1>
+    <form method="post" class="card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button" type="submit">Log in</button>
+    </form>
+{% endblock %}

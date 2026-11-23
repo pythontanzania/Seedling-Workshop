@@ -1,0 +1,14 @@
+{% extends "fundraisers/base.html" %}
+
+{% block content %}
+    <h1>Fundraisers</h1>
+    {% for fundraiser in fundraisers %}
+        <div class="card">
+            <h2><a href="{% url 'fundraiser_detail' fundraiser.id %}">{{ fundraiser.name }}</a></h2>
+            <div class="bar"><div class="fill" style="width: {{ fundraiser.percent }}%"></div></div>
+            <p>TZS {{ fundraiser.total_paid|floatformat:"0g" }} of {{ fundraiser.target|floatformat:"0g" }} ({{ fundraiser.percent }}%)</p>
+        </div>
+    {% empty %}
+        <p>No fundraisers yet.</p>
+    {% endfor %}
+{% endblock %}

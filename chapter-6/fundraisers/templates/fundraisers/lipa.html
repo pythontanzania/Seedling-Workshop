@@ -1,0 +1,14 @@
+{% extends "fundraisers/base.html" %}
+
+{% block content %}
+    <div class="card">
+        <h1>Confirm payment</h1>
+        <p>Pay <strong>TZS {{ pledge.balance|floatformat:"0g" }}</strong> to <strong>{{ pledge.fundraiser.name }}</strong>?</p>
+        <p>This is a pretend payment. No real money moves.</p>
+        <form method="post" action="{% url 'payment_callback' pledge.id %}">
+            {% csrf_token %}
+            <button class="button" type="submit">Confirm</button>
+            <a href="{% url 'fundraiser_detail' pledge.fundraiser.id %}">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

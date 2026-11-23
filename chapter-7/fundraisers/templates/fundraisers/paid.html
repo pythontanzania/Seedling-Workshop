@@ -1,0 +1,9 @@
+{% extends "fundraisers/base.html" %}
+
+{% block content %}
+    <div class="card">
+        <h1 class="paid">Payment received</h1>
+        <p>Asante {{ pledge.name }}! Reference: <strong>{{ reference }}</strong></p>
+        <p><a href="{% url 'fundraiser_detail' pledge.fundraiser.id %}">Back to {{ pledge.fundraiser.name }}</a></p>
+    </div>
+{% endblock %}
